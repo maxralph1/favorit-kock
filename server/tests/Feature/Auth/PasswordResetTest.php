@@ -16,8 +16,8 @@ class PasswordResetTest extends TestCase
         $user = User::factory()->create();
 
         $response = $this->actingAs($user)->putJson('/api/v1/password-reset', [
-            'current_password'      => 'password',
-            'password'              => 'testing123',
+            'current_password' => 'password',
+            'password' => 'testing123',
             'password_confirmation' => 'testing123',
         ]);
 
