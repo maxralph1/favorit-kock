@@ -2,9 +2,9 @@
 
 namespace Tests\Feature\Auth;
 
-use Tests\TestCase;
-use Illuminate\Foundation\Testing\WithFaker;
+// use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Tests\TestCase;
 
 class RegisterTest extends TestCase
 {
@@ -68,7 +68,7 @@ class RegisterTest extends TestCase
         $response3 = $this->postJson('/api/v1/register', [
             'username' => 'johndoe1',
             'name' => 'John Doe',
-            'password'              => 'password',
+            'password' => 'password',
             'password_confirmation' => 'wrong_password',
         ]);
 
@@ -93,8 +93,8 @@ class RegisterTest extends TestCase
         $response5->assertStatus(422);
 
         $this->assertDatabaseMissing('users', [
-            'username'  => 'johndoe1',
-            'name'  => 'John Doe',
+            'username' => 'johndoe1',
+            'name' => 'John Doe',
             'email' => 'john@example.com',
         ]);
     }

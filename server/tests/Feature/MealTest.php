@@ -2,13 +2,13 @@
 
 namespace Tests\Feature;
 
-use Tests\TestCase;
+// use Illuminate\Foundation\Testing\WithFaker;
+use App\Models\Category;
 use App\Models\Meal;
 use App\Models\Role;
 use App\Models\User;
-use App\Models\Category;
-use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Tests\TestCase;
 
 class MealTest extends TestCase
 {
@@ -164,7 +164,7 @@ class MealTest extends TestCase
 
         $this->assertDatabaseHas('meals', [
             'id' => $meal->id,
-            'deleted_at' => $meal->updated_at       // consider ignoring this line as the 'deleted_at' may differ from the 'updated_at' field by 1 second, thereby causing the test to fail; but will pass if ran again immediately after a failure.
+            'deleted_at' => $meal->updated_at,       // consider ignoring this line as the 'deleted_at' may differ from the 'updated_at' field by 1 second, thereby causing the test to fail; but will pass if ran again immediately after a failure.
         ])->assertDatabaseCount('meals', 13);
 
         $response2->assertStatus(403);

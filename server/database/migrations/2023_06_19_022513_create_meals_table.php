@@ -15,9 +15,9 @@ return new class extends Migration
             $table->ulid('id')->primary();
             $table->foreignUlid('category_id')->constrained();
             $table->string('title')->unique();
-            $table->string('description')->nullable();
+            $table->text('description')->nullable();
             $table->unsignedInteger('price');
-            $table->boolean('active')->default(false);
+            $table->boolean('active')->default(true);
             $table->timestamps();
             $table->softDeletes();
         });

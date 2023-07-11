@@ -2,16 +2,27 @@
 
 namespace App\Http\Controllers\Api\V1\Admin;
 
-use App\Models\UserImage;
 use App\Http\Controllers\Controller;
-use App\Http\Resources\UserImageResource;
 use App\Http\Requests\StoreUserImageRequest;
 use App\Http\Requests\UpdateUserImageRequest;
+use App\Http\Resources\UserImageResource;
+use App\Models\UserImage;
 
+/**
+ * @group Admin endpoints
+ */
 class UserImageController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * GET User Images
+     *
+     * Returns paginated list of user images.
+     * 
+     * @authenticated
+     *
+     * @queryParam page integer Page number. Example: 1
+     *
+     * @response {"data":{"id":"01h3hkhxrh15atksjr11hrck0d","image_url":"https://via.placeholder.com/133x422.png/00dd55?tex...","user_id":"01h3hkhxrh15atksjr11hrck0d"}, ...}
      */
     public function index()
     {
@@ -23,7 +34,13 @@ class UserImageController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * POST User Image
+     *
+     * Creates a new User Image record.
+     *
+     * @authenticated
+     *
+     * @response {"data":{"id":"01h3hkhxrh15atksjr11hrck0d","image_url":"https://via.placeholder.com/133x422.png/00dd55?tex...","user_id":"01h3hkhxrh15atksjr11hrck0d"}, ...}
      */
     public function store(StoreUserImageRequest $request)
     {
@@ -33,7 +50,14 @@ class UserImageController extends Controller
     }
 
     /**
-     * Display the specified resource.
+     * GET User Image
+     *
+     * Returns a User Image record.
+     *
+     * @authenticated
+     *
+     * @response {"data":{"id":"01h3hkhxrh15atksjr11hrck0d","image_url":"https://via.placeholder.com/133x422.png/00dd55?tex...","user_id":"01h3hkhxrh15atksjr11hrck0d"}, ...}
+     * @response 404 {"message":"Record not found."}
      */
     public function show(UserImage $userImage)
     {
@@ -41,7 +65,13 @@ class UserImageController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
+     * PUT User Image
+     *
+     * Updates User Image record.
+     *
+     * @authenticated
+     *
+     * @response {"data":{"id":"01h3hkhxrh15atksjr11hrck0d","image_url":"https://via.placeholder.com/133x422.png/00dd55?tex...","user_id":"01h3hkhxrh15atksjr11hrck0d"}, ...}
      */
     public function update(UpdateUserImageRequest $request, UserImage $userImage)
     {
@@ -51,7 +81,13 @@ class UserImageController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * DELETE User Image
+     *
+     * Deletes User Image record.
+     * 
+     * @authenticated
+     *
+     * @response 204 {}
      */
     public function destroy(UserImage $userImage)
     {

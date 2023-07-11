@@ -2,12 +2,12 @@
 
 namespace Tests\Feature;
 
-use Tests\TestCase;
+// use Illuminate\Foundation\Testing\WithFaker;
 use App\Models\Role;
 use App\Models\User;
 use App\Models\UserAddress;
-use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Tests\TestCase;
 
 class UserAddressTest extends TestCase
 {
@@ -302,13 +302,12 @@ class UserAddressTest extends TestCase
         $response2 = $this->actingAs($admin)->deleteJson('/api/v1/admin/user-addresses/' . $user_address2->id);
         $response3 = $this->actingAs($user)->deleteJson('/api/v1/admin/user-addresses/' . $user_address3->id);
 
-
         $response->assertNoContent();
         $response2->assertNoContent();
 
         $this->assertDatabaseHas('user_addresses', [
             'id' => $user_address->id,
-            'deleted_at' => $user_address->updated_at       // consider ignoring this line as the 'deleted_at' may differ from the 'updated_at' field by 1 second, thereby causing the test to fail; but will pass if ran again immediately after a failure.
+            'deleted_at' => $user_address->updated_at,       // consider ignoring this line as the 'deleted_at' may differ from the 'updated_at' field by 1 second, thereby causing the test to fail; but will pass if ran again immediately after a failure.
         ])->assertDatabaseCount('user_addresses', 13);
 
         $response3->assertStatus(403);
@@ -339,7 +338,6 @@ class UserAddressTest extends TestCase
         $response3 = $this->actingAs($user)->deleteJson('/api/v1/user/user-addresses/' . $userAddress->id);
         $response4 = $this->actingAs($rider)->deleteJson('/api/v1/rider/user-addresses/' . $riderAddress->id);
 
-
         $response1->assertNoContent();
         $response2->assertNoContent();
         $response3->assertNoContent();
@@ -347,22 +345,22 @@ class UserAddressTest extends TestCase
 
         $this->assertDatabaseHas('user_addresses', [
             'id' => $superAdminAddress->id,
-            'deleted_at' => $superAdminAddress->updated_at       // consider ignoring this line as the 'deleted_at' may differ from the 'updated_at' field by 1 second, thereby causing the test to fail; but will pass if ran again immediately after a failure.
+            'deleted_at' => $superAdminAddress->updated_at,       // consider ignoring this line as the 'deleted_at' may differ from the 'updated_at' field by 1 second, thereby causing the test to fail; but will pass if ran again immediately after a failure.
         ])->assertDatabaseCount('user_addresses', 14);
 
         $this->assertDatabaseHas('user_addresses', [
             'id' => $adminAddress->id,
-            'deleted_at' => $adminAddress->updated_at       // consider ignoring this line as the 'deleted_at' may differ from the 'updated_at' field by 1 second, thereby causing the test to fail; but will pass if ran again immediately after a failure.
+            'deleted_at' => $adminAddress->updated_at,       // consider ignoring this line as the 'deleted_at' may differ from the 'updated_at' field by 1 second, thereby causing the test to fail; but will pass if ran again immediately after a failure.
         ])->assertDatabaseCount('user_addresses', 14);
 
         $this->assertDatabaseHas('user_addresses', [
             'id' => $userAddress->id,
-            'deleted_at' => $userAddress->updated_at       // consider ignoring this line as the 'deleted_at' may differ from the 'updated_at' field by 1 second, thereby causing the test to fail; but will pass if ran again immediately after a failure.
+            'deleted_at' => $userAddress->updated_at,       // consider ignoring this line as the 'deleted_at' may differ from the 'updated_at' field by 1 second, thereby causing the test to fail; but will pass if ran again immediately after a failure.
         ])->assertDatabaseCount('user_addresses', 14);
 
         $this->assertDatabaseHas('user_addresses', [
             'id' => $riderAddress->id,
-            'deleted_at' => $riderAddress->updated_at       // consider ignoring this line as the 'deleted_at' may differ from the 'updated_at' field by 1 second, thereby causing the test to fail; but will pass if ran again immediately after a failure.
+            'deleted_at' => $riderAddress->updated_at,       // consider ignoring this line as the 'deleted_at' may differ from the 'updated_at' field by 1 second, thereby causing the test to fail; but will pass if ran again immediately after a failure.
         ])->assertDatabaseCount('user_addresses', 14);
     }
 }

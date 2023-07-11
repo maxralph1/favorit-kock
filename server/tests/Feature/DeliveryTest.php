@@ -2,13 +2,13 @@
 
 namespace Tests\Feature;
 
-use Tests\TestCase;
+// use Illuminate\Foundation\Testing\WithFaker;
+use App\Models\Delivery;
+use App\Models\Order;
 use App\Models\Role;
 use App\Models\User;
-use App\Models\Order;
-use App\Models\Delivery;
-use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Tests\TestCase;
 
 class DeliveryTest extends TestCase
 {
@@ -227,13 +227,12 @@ class DeliveryTest extends TestCase
         $response2 = $this->actingAs($admin)->deleteJson('/api/v1/admin/deliveries/' . $delivery2->id);
         $response3 = $this->actingAs($user)->deleteJson('/api/v1/admin/deliveries/' . $delivery3->id);
 
-
         $response->assertNoContent();
         $response2->assertNoContent();
 
         $this->assertDatabaseHas('deliveries', [
             'id' => $delivery->id,
-            'deleted_at' => $delivery->updated_at       // consider ignoring this line as the 'deleted_at' may differ from the 'updated_at' field by 1 second, thereby causing the test to fail; but will pass if ran again immediately after a failure.
+            'deleted_at' => $delivery->updated_at,       // consider ignoring this line as the 'deleted_at' may differ from the 'updated_at' field by 1 second, thereby causing the test to fail; but will pass if ran again immediately after a failure.
         ])->assertDatabaseCount('deliveries', 13);
 
         $response3->assertStatus(403);
@@ -251,7 +250,7 @@ class DeliveryTest extends TestCase
 
         $this->assertDatabaseHas('deliveries', [
             'id' => $delivery->id,
-            'deleted_at' => $delivery->updated_at       // consider ignoring this line as the 'deleted_at' may differ from the 'updated_at' field by 1 second, thereby causing the test to fail; but will pass if ran again immediately after a failure.
+            'deleted_at' => $delivery->updated_at,       // consider ignoring this line as the 'deleted_at' may differ from the 'updated_at' field by 1 second, thereby causing the test to fail; but will pass if ran again immediately after a failure.
         ])->assertDatabaseCount('deliveries', 11);
     }
 }

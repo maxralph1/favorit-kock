@@ -2,14 +2,14 @@
 
 namespace Tests\Feature;
 
+// use Illuminate\Foundation\Testing\WithFaker;
 use App\Models\Meal;
-use Tests\TestCase;
-use App\Models\Role;
-use App\Models\User;
 use App\Models\Order;
 use App\Models\OrderItem;
-use Illuminate\Foundation\Testing\WithFaker;
+use App\Models\Role;
+use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Tests\TestCase;
 
 class OrderItemTest extends TestCase
 {
@@ -251,13 +251,12 @@ class OrderItemTest extends TestCase
         $response2 = $this->actingAs($admin)->deleteJson('/api/v1/admin/order-items/' . $orderItem2->id);
         $response3 = $this->actingAs($user)->deleteJson('/api/v1/user/order-items/' . $orderItem3->id);
 
-
         $response->assertNoContent();
         $response2->assertStatus(405);
 
         $this->assertDatabaseHas('order_items', [
             'id' => $orderItem->id,
-            'deleted_at' => $orderItem->updated_at       // consider ignoring this line as the 'deleted_at' may differ from the 'updated_at' field by 1 second, thereby causing the test to fail; but will pass if ran again immediately after a failure.
+            'deleted_at' => $orderItem->updated_at,       // consider ignoring this line as the 'deleted_at' may differ from the 'updated_at' field by 1 second, thereby causing the test to fail; but will pass if ran again immediately after a failure.
         ])->assertDatabaseCount('order_items', 13);
 
         $response3->assertStatus(403);
@@ -283,14 +282,13 @@ class OrderItemTest extends TestCase
         $response2 = $this->actingAs($admin)->deleteJson('/api/v1/admin/order-items/' . $adminOrderItem->id);
         $response3 = $this->actingAs($user)->deleteJson('/api/v1/user/order-items/' . $userOrderItem->id);
 
-
         $response1->assertNoContent();
         $response2->assertStatus(405);
         $response3->assertNoContent();
 
         $this->assertDatabaseHas('order_items', [
             'id' => $superAdminOrderItem->id,
-            'deleted_at' => $superAdminOrderItem->updated_at       // consider ignoring this line as the 'deleted_at' may differ from the 'updated_at' field by 1 second, thereby causing the test to fail; but will pass if ran again immediately after a failure.
+            'deleted_at' => $superAdminOrderItem->updated_at,       // consider ignoring this line as the 'deleted_at' may differ from the 'updated_at' field by 1 second, thereby causing the test to fail; but will pass if ran again immediately after a failure.
         ]);
 
         $this->assertDatabaseHas('order_items', [
@@ -300,7 +298,7 @@ class OrderItemTest extends TestCase
 
         $this->assertDatabaseHas('order_items', [
             'id' => $userOrderItem->id,
-            'deleted_at' => $userOrderItem->updated_at       // consider ignoring this line as the 'deleted_at' may differ from the 'updated_at' field by 1 second, thereby causing the test to fail; but will pass if ran again immediately after a failure.
+            'deleted_at' => $userOrderItem->updated_at,       // consider ignoring this line as the 'deleted_at' may differ from the 'updated_at' field by 1 second, thereby causing the test to fail; but will pass if ran again immediately after a failure.
         ])->assertDatabaseCount('order_items', 13);
     }
 }

@@ -2,15 +2,26 @@
 
 namespace App\Http\Controllers\Api\V1\Rider;
 
-use App\Models\Delivery;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\DeliveryResource;
+use App\Models\Delivery;
+use Illuminate\Http\Request;
 
+/**
+ * @group Rider endpoints
+ */
 class DeliveryController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * GET Deliveries
+     *
+     * Returns paginated list of deliveries.
+     * 
+     * @authenticated
+     *
+     * @queryParam page integer Page number. Example: 1
+     *
+     * @response {"data":{"id":"01h3hkhxrh15atksjr11hrck0d","order_id":"01h3hkhxrh15atksjr11hrck0d","user_id":"01h3hkhxrh15atksjr11hrck0d","delivered":1,"time_delivered":"2007-03-15 16:07:24"}, ...}
      */
     public function index()
     {
@@ -22,7 +33,14 @@ class DeliveryController extends Controller
     }
 
     /**
-     * Display the specified resource.
+     * GET Delivery
+     *
+     * Returns a Delivery record.
+     *
+     * @authenticated
+     *
+     * @response {"data":{"id":"01h3hkhxrh15atksjr11hrck0d","order_id":"01h3hkhxrh15atksjr11hrck0d","user_id":"01h3hkhxrh15atksjr11hrck0d","delivered":1,"time_delivered":"2007-03-15 16:07:24"}, ...}
+     * @response 404 {"message":"Record not found."}
      */
     public function show(Delivery $delivery)
     {
@@ -34,7 +52,13 @@ class DeliveryController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
+     * PUT Delivery
+     *
+     * Updates Delivery record.
+     *
+     * @authenticated
+     *
+     * @response {"data":{"id":"01h3hkhxrh15atksjr11hrck0d","order_id":"01h3hkhxrh15atksjr11hrck0d","user_id":"01h3hkhxrh15atksjr11hrck0d","delivered":1,"time_delivered":"2007-03-15 16:07:24"}, ...}
      */
     public function update(Request $request, Delivery $delivery)
     {
@@ -48,7 +72,13 @@ class DeliveryController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * DELETE Delivery
+     *
+     * Deletes Delivery record.
+     * 
+     * @authenticated
+     *
+     * @response 204 {}
      */
     public function destroy(Delivery $delivery)
     {

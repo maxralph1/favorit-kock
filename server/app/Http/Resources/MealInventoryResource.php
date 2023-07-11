@@ -2,8 +2,8 @@
 
 namespace App\Http\Resources;
 
+// use App\Http\Resources\MealResource;
 use Illuminate\Http\Request;
-use App\Http\Resources\MealResource;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class MealInventoryResource extends JsonResource

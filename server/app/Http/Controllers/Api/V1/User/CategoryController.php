@@ -2,15 +2,26 @@
 
 namespace App\Http\Controllers\Api\V1\User;
 
-use App\Models\Category;
-use Illuminate\Http\Request;
+// use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\CategoryResource;
+use App\Models\Category;
 
+/**
+ * @group User endpoints
+ */
 class CategoryController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * GET Categories
+     *
+     * Returns paginated list of categories.
+     * 
+     * @authenticated
+     *
+     * @queryParam page integer Page number. Example: 1
+     *
+     * @response {"data":{"id":"01h3hkhxrh15atksjr11hrck0d","title":"First category","description":"This is the first category"}, ...}
      */
     public function index()
     {
@@ -20,7 +31,14 @@ class CategoryController extends Controller
     }
 
     /**
-     * Display the specified resource.
+     * GET Category
+     *
+     * Returns a Category record.
+     *
+     * @authenticated
+     *
+     * @response {"data":{"id":"01h3hkhxrh15atksjr11hrck0d","title":"First category","description":"This is the first category"}, ...}
+     * @response 404 {"message":"Record not found."}
      */
     public function show(Category $category)
     {

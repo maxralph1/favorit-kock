@@ -2,33 +2,37 @@
 
 namespace App\Http\Controllers\Api\V1\Auth;
 
+use App\Http\Controllers\Controller;
+use App\Http\Requests\RegisterRequest;
 use App\Models\Role;
 use App\Models\User;
-use Illuminate\Http\Response;
-use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Hash;
-use App\Http\Requests\RegisterRequest;
 use Illuminate\Auth\Events\Registered;
+use Illuminate\Support\Facades\Hash;
+use Symfony\Component\HttpFoundation\Response;
 
+/**
+ * @group Auth endpoints
+ */
 class RegisterController extends Controller
 {
     /**
-     * Handle the incoming request.
+     * POST Register
+     *
+     * Register with an existing user.
+     *
+     * @response {"access_token":"1|HvglYzIrLURVGx6Xe41HKj1CrNsxRxe4pLA2oISo","name":"John Snow","role":4}
+     * @response 422 {"error": "The provided credentials are incorrect."}
      */
     public function __invoke(RegisterRequest $request)
     {
         $request->validated();
 
-        // remove on production/publishing
-        // $role = Role::create(['name' => 'generic-user']);
-
         $user = User::create([
-            'username'     => $request->username,
-            'name'     => $request->name,
-            'email'    => $request->email,
+            'username' => $request->username,
+            'name' => $request->name,
+            'email' => $request->email,
             'password' => Hash::make($request->password),
-            // 'role_id' => $role->id, //remove on production/publishing
-            'role_id' => Role::USER_ROLE,    //re-instate on production/publishing
+            'role_id' => Role::USER_ROLE,
         ]);
 
         event(new Registered($user));
@@ -37,6 +41,8 @@ class RegisterController extends Controller
 
         return response()->json([
             'access_token' => $user->createToken($device)->plainTextToken,
+            'name' => $user->name,
+            'role' => $user->role_id,
         ], Response::HTTP_CREATED);
     }
 }

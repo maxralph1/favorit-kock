@@ -2,8 +2,8 @@
 
 namespace App\Http\Resources;
 
+// use App\Http\Resources\UserResource;
 use Illuminate\Http\Request;
-use App\Http\Resources\UserResource;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class UserImageResource extends JsonResource

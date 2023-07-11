@@ -2,16 +2,27 @@
 
 namespace App\Http\Controllers\Api\V1\Admin;
 
-use App\Models\MealImage;
 use App\Http\Controllers\Controller;
-use App\Http\Resources\MealImageResource;
 use App\Http\Requests\StoreMealImageRequest;
 use App\Http\Requests\UpdateMealImageRequest;
+use App\Http\Resources\MealImageResource;
+use App\Models\MealImage;
 
+/**
+ * @group Admin endpoints
+ */
 class MealImageController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * GET Meal Images
+     *
+     * Returns paginated list of meal images.
+     * 
+     * @authenticated
+     *
+     * @queryParam page integer Page number. Example: 1
+     *
+     * @response {"data":{"id":"01h3hkhxrh15atksjr11hrck0d","image_url":"https://via.placeholder.com/133x422.png/00dd55?tex...","meal":{"id":"01h3hkhxrh15atksjr11hrck0d","title":"First meal","description":"This is the first meal","price":"20.00","active":1,"category":{"id":"","title":"First meal","description":"This is the first meal"}},"default":1}, ...}
      */
     public function index()
     {
@@ -23,7 +34,14 @@ class MealImageController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * POST Meal Images
+     *
+     * Creates a new Meal Image record.
+     *
+     * @authenticated
+     *
+     * @response {"data":{"id":"01h3hkhxrh15atksjr11hrck0d","title":"First meal","description":"This is the first meal","price":"20.00","active":1,"category":{"id":"","title":"First meal","description":"This is the first meal"}}, ...}
+     * @response 422 {"message":"The title field is required.","errors":{"title":["The title field is required."]}, ...}
      */
     public function store(StoreMealImageRequest $request)
     {
@@ -33,7 +51,14 @@ class MealImageController extends Controller
     }
 
     /**
-     * Display the specified resource.
+     * GET Meal Image
+     *
+     * Returns a Meal Image record.
+     *
+     * @authenticated
+     *
+     * @response {"data":{"id":"01h3hkhxrh15atksjr11hrck0d","title":"First meal","description":"This is the first meal","price":"20.00","active":1,"category":{"id":"","title":"First meal","description":"This is the first meal"}}, ...}
+     * @response 404 {"message":"Record not found."}
      */
     public function show(MealImage $mealImage)
     {
@@ -41,7 +66,13 @@ class MealImageController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
+     * PUT Meal Image
+     *
+     * Updates Meal Image record.
+     *
+     * @authenticated
+     *
+     * @response {"data":{"id":"01h3hkhxrh15atksjr11hrck0d","title":"First meal","description":"This is the first meal","price":"20.00","active":1,"category":{"id":"","title":"First meal","description":"This is the first meal"}}, ...}
      */
     public function update(UpdateMealImageRequest $request, MealImage $mealImage)
     {
@@ -51,7 +82,13 @@ class MealImageController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * DELETE Meal Image
+     *
+     * Deletes Meal Image record.
+     * 
+     * @authenticated
+     *
+     * @response 204 {}
      */
     public function destroy(MealImage $mealImage)
     {

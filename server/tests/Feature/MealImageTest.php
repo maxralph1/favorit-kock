@@ -2,13 +2,13 @@
 
 namespace Tests\Feature;
 
-use Tests\TestCase;
+// use Illuminate\Foundation\Testing\WithFaker;
 use App\Models\Meal;
 use App\Models\MealImage;
 use App\Models\Role;
 use App\Models\User;
-use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Tests\TestCase;
 
 class MealImageTest extends TestCase
 {
@@ -108,7 +108,7 @@ class MealImageTest extends TestCase
                 'data' => ['0' => 'image_url'],
             ]);
 
-        $response2->assertStatus(200)
+        $response3->assertStatus(200)
             ->assertJsonCount(4, 'data')
             ->assertJsonStructure([
                 'data' => ['0' => 'image_url'],
@@ -176,13 +176,12 @@ class MealImageTest extends TestCase
         $response2 = $this->actingAs($admin)->deleteJson('/api/v1/admin/meal-images/' . $meal_image2->id);
         $response3 = $this->actingAs($user)->deleteJson('/api/v1/admin/meal-images/' . $meal_image3->id);
 
-
         $response->assertNoContent();
         $response2->assertNoContent();
 
         $this->assertDatabaseHas('meal_images', [
             'id' => $meal_image->id,
-            'deleted_at' => $meal_image->updated_at       // consider ignoring this line as the 'deleted_at' may differ from the 'updated_at' field by 1 second, thereby causing the test to fail; but will pass if ran again immediately after a failure.
+            'deleted_at' => $meal_image->updated_at,       // consider ignoring this line as the 'deleted_at' may differ from the 'updated_at' field by 1 second, thereby causing the test to fail; but will pass if ran again immediately after a failure.
         ])->assertDatabaseCount('meal_images', 13);
 
         $response3->assertStatus(403);

@@ -1,66 +1,173 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Favorit-Kock Restaurant and Food Ordering and Delivery Application
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+Guide to (usage and description of) the Favorit-Kock application.
 
-## About Laravel
+**Table of Contents**
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+1. [What Favorit-Kock Is](#what-is-favorit-kock)
+2. [Features of the Application](#features-of-the-application)
+3. [Technical Features of the Application](#technical-features-of-the-application)
+4. [Technologies Utilized in Crafting Favorit-Kock](#technologies-utilized-in-crafting-favorit-kock)
+      1. [Server-side](#server-side)
+      2. [Client-side](#client-side)
+5. [API Documentation](#api-documentation)
+6. [Database Structure](#database-structure)
+7. [How to Install and Run the Favorit-Kock Application Locally On Your Device](#how-to-install-and-run-the-favorit-kock-application-locally-on-your-device)
+      1. [Requirements](#requirements)
+      2. [Installation Procedure](#installation-procedure)
+         1. [Server-side Terminal](#server-side-terminal)
+         2. [Client-side Terminal](#client-side-terminal)
+8. [Footnotes !important](#footnotes-important)
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## What Is Favorit-Kock?
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+Favorit-Kock is a restaurant/bar food ordering and delivery application where users can order (pay online for) food and have it delivered to their doorsteps; administrators can add events to be booked. (gif image showing working application comes here)
 
-## Learning Laravel
+## Features of the application
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+1. There are 4 roles: generic user, rider, admin and superadmin. These roles have different levels of authorization.
+2. All user roles can register and add images to their profile.
+3. Users can order and pay for food online.
+4. Riders can deliver food to users location  based on user orders.
+5. Admin can attend to users queries from their level of authorization.
+6. Superadmin have a higher authorization with more capabilities.
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+## Technical Features of the Application
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 2000 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+1. Authentication
+2. Authorization (multiple roles)
+3. Access tokens
+4. Soft-delete function so that data is never really lost (all deleted data can be retrieved/re-activated)
+5. Image upload to the cloud (cloudinary)
+6. All incoming requests are validated multiple times on both client side and server-side.
+7. API requests rate-limiting to prevent attacks.
+8. Other security measures in place to prevent attacks.
+9. Multiple error handlers (for both planned and unplanned errors) to catch all errors properly.
+10. Plus much more...
 
-## Laravel Sponsors
+## Technologies Utilized in Crafting Favorit-Kock
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+Favorit-Kock is crafted in the following programming languages/frameworks and technologies:
 
-### Premium Partners
+### **Server-side:**
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
-- **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
-- **[Lendio](https://lendio.com)**
+1. **Laravel (PHP)** on the server-side.
+      1. **Laravel Tests** (for writing comprehensive tests for the application)2. **MYSQL** (for database).
 
-## Contributing
+### **Client-side:**
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+1. **React.JS (JavaScript)** library on the client-side.
+2. **Bootstrap5** for styling.
+3. Vanilla **CSS3** for custom styling.
 
-## Code of Conduct
+## API Documentation
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+Here is a link to the API documentation:(link to the API documentation comes here)
 
-## Security Vulnerabilities
+## Database Structure
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+(image for the database structure here)
 
-## License
+## How to Install and Run the Favorit-Kock Application Locally On Your Device
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+### Requirements:
+
+1. You must have PHP installed on your device. Visit the [official PHP website](https://www.php.net/) and follow the steps for download and installation.
+
+2. After installing PHP, download and install a text editor (e.g. [VS Code](https://code.visualstudio.com/Download)) if you do not have one.
+
+### Installation procedure:
+
+Then go to your terminal and follow these steps:
+
+1. From your terminal, cd (change directory) into your favorite directory (folder) where you would like to have the application files
+
+```
+cd C:\Users\maxim\Desktop>
+```
+
+Here I changed directory into my personal Desktop space/folder on my Windows Computer. And then;
+
+2. Clone this repository from here on Github using either of the 2 commands on your terminal:
+
+```
+git clone https://github.com/maxralph1/favorit-kock.git
+```
+
+or
+
+```
+git clone git@github.com:maxralph1/favorit-kock.git
+```
+
+3. And to end this section, CD into the newly installed "favorit-kock" application file with the following commands.
+
+```
+cd favorit-kock
+```
+
+At this point, you must have 2 terminals running side-by-side (server-side (to run the server side code) and client-side (to consume the server-side API)).
+
+#### Server-side Terminal
+
+1. On the first terminal, change directory into the server file
+
+```
+cd server
+```
+
+2. From here, use the command below to install all dependencies I utilized in this application as can be seen from my 'server/composer.json' file
+
+```
+composer install
+```
+
+3. Spin up the server with the command:
+
+```
+php artisan serve
+```
+
+Your server traditionally starts on port 8000 (http://localhost:8000), if you have nothing currently running this port.
+
+4. Go to the 'server/.env' file which you must have gotten from modifying the 'server/env.example' file and make sure the database name is what you want it to be.
+
+5. You should already have a MySQL database installed and running. Create a database instance with same name as that for the database above. I use XAMPP (you can [get XAMPP here](https://www.apachefriends.org/download.html)). It makes it easier for me.
+
+6. Go back to your server terminal and run the command to migrate and seed your database:
+
+```
+php artisan migrate --seed
+```
+
+#### Client-side Terminal
+
+1. On the second terminal, change directory into the server file
+
+```
+cd client
+```
+
+2. Use the command below to install all dependencies I utilized in this application as can be seen from my 'client/package.json' file
+
+```
+npm i
+```
+
+3. Spin up the client-side (front-end) to consume the back-end API using the following command:
+
+```
+npm run dev
+```
+
+Your application should be up on http://localhost:5173/ if you have nothing previously running on the port. Check your terminal to confirm the actual port.
+
+## Footnotes !important
+
+This application is strictly for demonstration purposes. It is not yet production-ready and should never be used as such.I will continue to gradually update this project in my free time.
+
+\*\*On the general pattern of coding, if you noticed, the entire application has a specific approach in structure. I however decided to deviate (bring in several flavors) a little (but paid attention not to deviate too much) from these principles so as to showcase my skills.
+
+In a real-world application, I would stick to a particular pattern.
+
+Finally, contributions/suggestions on how to improve this project, are welcome.

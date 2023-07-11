@@ -23,7 +23,7 @@ class UpdateMealRequest extends FormRequest
     {
         return [
             'category_id' => 'nullable',
-            'title' => 'nullable|unique:meals|max:75',
+            'title' => 'nullable|max:75',
             'description' => 'nullable|max:255',
             'price' => 'nullable|numeric',
             'active' => 'nullable|boolean',

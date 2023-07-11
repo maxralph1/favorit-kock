@@ -2,16 +2,27 @@
 
 namespace App\Http\Controllers\Api\V1\Admin;
 
-use App\Models\OrderItem;
 use App\Http\Controllers\Controller;
-use App\Http\Resources\OrderItemResource;
 use App\Http\Requests\StoreOrderItemRequest;
 use App\Http\Requests\UpdateOrderItemRequest;
+use App\Http\Resources\OrderItemResource;
+use App\Models\OrderItem;
 
+/**
+ * @group Admin endpoints
+ */
 class OrderItemController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * GET Order Items
+     *
+     * Returns paginated list of order items.
+     * 
+     * @authenticated
+     *
+     * @queryParam page integer Page number. Example: 1
+     *
+     * @response {"data":{"id":"01h3hkhxrh15atksjr11hrck0d","meal_id":"01h3hkhxrh15atksjr11hrck0d","order_id":"01h3hkhxrh15atksjr11hrck0d","user_id":"01h3hkhxrh15atksjr11hrck0d","amount_due":55,"quantity_ordered":5}, ...}
      */
     public function index()
     {
@@ -23,7 +34,13 @@ class OrderItemController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * POST Order Item
+     *
+     * Creates a new Order Item record.
+     *
+     * @authenticated
+     *
+     * @response {"data":{"id":"01h3hkhxrh15atksjr11hrck0d","meal_id":"01h3hkhxrh15atksjr11hrck0d","order_id":"01h3hkhxrh15atksjr11hrck0d","user_id":"01h3hkhxrh15atksjr11hrck0d","amount_due":55,"quantity_ordered":5}, ...}
      */
     public function store(StoreOrderItemRequest $request)
     {
@@ -33,7 +50,14 @@ class OrderItemController extends Controller
     }
 
     /**
-     * Display the specified resource.
+     * GET Order Item
+     *
+     * Returns an Order Item record.
+     *
+     * @authenticated
+     *
+     * @response {"data":{"id":"01h3hkhxrh15atksjr11hrck0d","meal_id":"01h3hkhxrh15atksjr11hrck0d","order_id":"01h3hkhxrh15atksjr11hrck0d","user_id":"01h3hkhxrh15atksjr11hrck0d","amount_due":55,"quantity_ordered":5}, ...}
+     * @response 404 {"message":"Record not found."}
      */
     public function show(OrderItem $orderItem)
     {
@@ -41,7 +65,13 @@ class OrderItemController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
+     * PUT Order Item
+     *
+     * Updates Order Item record.
+     *
+     * @authenticated
+     *
+     * @response {"data":{"id":"01h3hkhxrh15atksjr11hrck0d","meal_id":"01h3hkhxrh15atksjr11hrck0d","order_id":"01h3hkhxrh15atksjr11hrck0d","user_id":"01h3hkhxrh15atksjr11hrck0d","amount_due":55,"quantity_ordered":5}, ...}
      */
     public function update(UpdateOrderItemRequest $request, OrderItem $orderItem)
     {
@@ -51,7 +81,13 @@ class OrderItemController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * DELETE Order Item
+     *
+     * Deletes Order Item record.
+     * 
+     * @authenticated
+     *
+     * @response 204 {}
      */
     public function destroy(OrderItem $orderItem)
     {

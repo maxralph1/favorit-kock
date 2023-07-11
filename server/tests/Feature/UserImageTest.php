@@ -2,12 +2,12 @@
 
 namespace Tests\Feature;
 
-use Tests\TestCase;
+// use Illuminate\Foundation\Testing\WithFaker;
 use App\Models\Role;
 use App\Models\User;
 use App\Models\UserImage;
-use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Tests\TestCase;
 
 class UserImageTest extends TestCase
 {
@@ -282,13 +282,12 @@ class UserImageTest extends TestCase
         $response2 = $this->actingAs($admin)->deleteJson('/api/v1/admin/user-images/' . $user_image2->id);
         $response3 = $this->actingAs($user)->deleteJson('/api/v1/admin/user-images/' . $user_image3->id);
 
-
         $response->assertNoContent();
         $response2->assertNoContent();
 
         $this->assertDatabaseHas('user_images', [
             'id' => $user_image->id,
-            'deleted_at' => $user_image->updated_at       // consider ignoring this line as the 'deleted_at' may differ from the 'updated_at' field by 1 second, thereby causing the test to fail; but will pass if ran again immediately after a failure.
+            'deleted_at' => $user_image->updated_at,       // consider ignoring this line as the 'deleted_at' may differ from the 'updated_at' field by 1 second, thereby causing the test to fail; but will pass if ran again immediately after a failure.
         ])->assertDatabaseCount('user_images', 13);
 
         $response3->assertStatus(403);
@@ -319,7 +318,6 @@ class UserImageTest extends TestCase
         $response3 = $this->actingAs($user)->deleteJson('/api/v1/user/user-images/' . $userImage->id);
         $response4 = $this->actingAs($rider)->deleteJson('/api/v1/rider/user-images/' . $riderImage->id);
 
-
         $response1->assertNoContent();
         $response2->assertNoContent();
         $response3->assertNoContent();
@@ -327,22 +325,22 @@ class UserImageTest extends TestCase
 
         $this->assertDatabaseHas('user_images', [
             'id' => $superAdminImage->id,
-            'deleted_at' => $superAdminImage->updated_at       // consider ignoring this line as the 'deleted_at' may differ from the 'updated_at' field by 1 second, thereby causing the test to fail; but will pass if ran again immediately after a failure.
+            'deleted_at' => $superAdminImage->updated_at,       // consider ignoring this line as the 'deleted_at' may differ from the 'updated_at' field by 1 second, thereby causing the test to fail; but will pass if ran again immediately after a failure.
         ])->assertDatabaseCount('user_images', 14);
 
         $this->assertDatabaseHas('user_images', [
             'id' => $adminImage->id,
-            'deleted_at' => $adminImage->updated_at       // consider ignoring this line as the 'deleted_at' may differ from the 'updated_at' field by 1 second, thereby causing the test to fail; but will pass if ran again immediately after a failure.
+            'deleted_at' => $adminImage->updated_at,       // consider ignoring this line as the 'deleted_at' may differ from the 'updated_at' field by 1 second, thereby causing the test to fail; but will pass if ran again immediately after a failure.
         ])->assertDatabaseCount('user_images', 14);
 
         $this->assertDatabaseHas('user_images', [
             'id' => $userImage->id,
-            'deleted_at' => $userImage->updated_at       // consider ignoring this line as the 'deleted_at' may differ from the 'updated_at' field by 1 second, thereby causing the test to fail; but will pass if ran again immediately after a failure.
+            'deleted_at' => $userImage->updated_at,       // consider ignoring this line as the 'deleted_at' may differ from the 'updated_at' field by 1 second, thereby causing the test to fail; but will pass if ran again immediately after a failure.
         ])->assertDatabaseCount('user_images', 14);
 
         $this->assertDatabaseHas('user_images', [
             'id' => $riderImage->id,
-            'deleted_at' => $riderImage->updated_at       // consider ignoring this line as the 'deleted_at' may differ from the 'updated_at' field by 1 second, thereby causing the test to fail; but will pass if ran again immediately after a failure.
+            'deleted_at' => $riderImage->updated_at,       // consider ignoring this line as the 'deleted_at' may differ from the 'updated_at' field by 1 second, thereby causing the test to fail; but will pass if ran again immediately after a failure.
         ])->assertDatabaseCount('user_images', 14);
     }
 }

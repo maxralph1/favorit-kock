@@ -2,13 +2,13 @@
 
 namespace Tests\Feature;
 
-use Tests\TestCase;
+// use Illuminate\Foundation\Testing\WithFaker;
 use App\Models\Meal;
+use App\Models\MealInventory;
 use App\Models\Role;
 use App\Models\User;
-use App\Models\MealInventory;
-use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Tests\TestCase;
 
 class MealInventoryTest extends TestCase
 {
@@ -171,13 +171,12 @@ class MealInventoryTest extends TestCase
         $response2 = $this->actingAs($admin)->deleteJson('/api/v1/admin/meal-inventories/' . $meal_inventory2->id);
         $response3 = $this->actingAs($user)->deleteJson('/api/v1/admin/meal-inventories/' . $meal_inventory3->id);
 
-
         $response->assertNoContent();
         $response2->assertNoContent();
 
         $this->assertDatabaseHas('meal_inventories', [
             'id' => $meal_inventory->id,
-            'deleted_at' => $meal_inventory->updated_at       // consider ignoring this line as the 'deleted_at' may differ from the 'updated_at' field by 1 second, thereby causing the test to fail; but will pass if ran again immediately after a failure.
+            'deleted_at' => $meal_inventory->updated_at,       // consider ignoring this line as the 'deleted_at' may differ from the 'updated_at' field by 1 second, thereby causing the test to fail; but will pass if ran again immediately after a failure.
         ])->assertDatabaseCount('meal_inventories', 13);
 
         $response3->assertStatus(403);

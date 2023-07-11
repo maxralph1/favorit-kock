@@ -3,9 +3,9 @@
 namespace App\Http\Controllers\Api\V1\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\CategoryMeal;
 use App\Http\Requests\StoreCategoryMealRequest;
 use App\Http\Requests\UpdateCategoryMealRequest;
+use App\Models\CategoryMeal;
 
 class CategoryMealController extends Controller
 {

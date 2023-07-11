@@ -20,10 +20,15 @@ class MealResource extends JsonResource
             'description' => $this->description,
             'price' => $this->price,
             'active' => $this->active,
+            // 'category' => [
+            //     'id' => $this->category->id,
+            //     'title' => $this->category->title,
+            // ],
             'category' => [
                 'id' => $this->category->id,
                 'title' => $this->category->title,
-            ]
+                'description'  => $this->category->description,
+            ],
             // 'images' => MealImageResource::collection($this->mealImages),
             // 'categories' => CategoryResource::collection($this->categories),
         ];

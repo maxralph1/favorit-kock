@@ -19,16 +19,16 @@ use Illuminate\Support\Facades\Route;
 */
 
 
-Route::post('register', Auth\RegisterController::class);
-Route::post('login', Auth\LoginController::class);
-Route::put('password-reset', Auth\PasswordResetController::class);
-
-
 Route::apiResource('categories', Public\CategoryController::class)->only(['index', 'show']);
 Route::apiResource('meals', Public\MealController::class)->only(['index', 'show']);
 
 
+Route::post('register', Auth\RegisterController::class);
+Route::post('login', Auth\LoginController::class);
+
+
 Route::middleware(['auth:sanctum'])->group(function () {
+    Route::put('password-reset', Auth\PasswordResetController::class);
     Route::post('logout', Auth\LogoutController::class);
 
 
@@ -40,6 +40,7 @@ Route::middleware(['auth:sanctum'])->group(function () {
         Route::apiResource('meal-inventories', Admin\MealInventoryController::class);
         Route::apiResource('orders', Admin\OrderController::class);
         Route::apiResource('order-items', Admin\OrderItemController::class);
+        Route::apiResource('users', Admin\UserController::class);
         Route::apiResource('user-addresses', Admin\UserAddressController::class);
         Route::apiResource('user-images', Admin\UserImageController::class);
     });
@@ -60,7 +61,6 @@ Route::middleware(['auth:sanctum'])->group(function () {
 
     Route::prefix('rider')->middleware(['role:rider'])->group(function () {
         Route::apiResource('deliveries', Rider\DeliveryController::class)->only(['index', 'show', 'destroy']);
-        // Route::apiResource('deliveries', Rider\DeliveryController::class)->only(['index', 'show', 'delete']);
         Route::apiResource('user-addresses', Rider\UserAddressController::class);
         Route::apiResource('user-images', Rider\UserImageController::class)->except(['index']);
     });
@@ -76,42 +76,4 @@ Route::middleware(['auth:sanctum'])->group(function () {
         Route::patch('user-addresses/{user_address}/make-default', [User\UserAddressController::class, 'makeDefault']);
         Route::apiResource('user-images', User\UserImageController::class)->except(['index']);
     });
-
-
-    // Route::prefix('admin')->group(function () {
-    //     Route::middleware(['role:super-admin|admin'])->group(function () {
-    //         Route::apiResource('categories', Admin\CategoryController::class)->except(['store', 'update', 'destroy']);
-    //         Route::apiResource('deliveries', Admin\DeliveryController::class);
-    //         Route::apiResource('meals', Admin\MealController::class)->except(['store', 'update', 'destroy']);
-    //         Route::apiResource('meal-images', Admin\MealImageController::class);
-    //         Route::apiResource('meal-inventories', Admin\MealInventoryController::class);
-    //         Route::apiResource('orders', Admin\OrderController::class)->except(['update', 'destroy']);
-    //         Route::apiResource('order-items', Admin\OrderItemController::class)->except(['update', 'destroy']);
-    //         Route::apiResource('user-addresses', Admin\UserAddressController::class);
-    //         Route::apiResource('user-imagees', Admin\UserImageController::class);
-    //     });
-
-    //     Route::middleware(['role:super-admin'])->group(function () {
-    //         Route::apiResource('categories', Admin\CategoryController::class)->only(['store', 'update', 'destroy']);
-    //         Route::apiResource('meals', Admin\MealController::class)->only(['store', 'update', 'destroy']);
-    //         Route::apiResource('orders', Admin\OrderController::class)->only(['update', 'destroy']);
-    //         Route::apiResource('order-items', Admin\OrderItemController::class)->only(['update', 'destroy']);
-    //         Route::apiResource('deliveries', Admin\DeliveryController::class);
-    //     });
-
-    //     Route::middleware(['role:rider'])->group(function () {
-    //         Route::apiResource('deliveries', Rider\DeliveryController::class)->except(['store']);
-    //     });
-    // });
-
-
-    // Route::prefix('user')->group(function () {
-    //     Route::middleware(['role:user'])->group(function () {
-    //         Route::apiResource('categories', User\CategoryController::class)->only(['index', 'show']);
-    //         Route::apiResource('meals', User\MealController::class)->only(['index', 'show']);
-    //         Route::apiResource('orders', User\OrderController::class);
-    //         Route::apiResource('user-addresses', User\UserAddressController::class);
-    //         Route::apiResource('user-images', User\UserImageController::class);
-    //     });
-    // });
 });

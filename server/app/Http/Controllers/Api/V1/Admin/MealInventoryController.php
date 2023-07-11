@@ -2,16 +2,27 @@
 
 namespace App\Http\Controllers\Api\V1\Admin;
 
-use App\Models\MealInventory;
 use App\Http\Controllers\Controller;
-use App\Http\Resources\MealInventoryResource;
 use App\Http\Requests\StoreMealInventoryRequest;
 use App\Http\Requests\UpdateMealInventoryRequest;
+use App\Http\Resources\MealInventoryResource;
+use App\Models\MealInventory;
 
+/**
+ * @group Admin endpoints
+ */
 class MealInventoryController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * GET Meal Inventories
+     *
+     * Returns paginated list of meal inventories.
+     * 
+     * @authenticated
+     *
+     * @queryParam page integer Page number. Example: 1
+     *
+     * @response {"data":{"id":"01h3hkhxrh15atksjr11hrck0d","meal_id":"01h3hkhxrh15atksjr11hrck0d","plates_prepared":64,"active":null}, ...}
      */
     public function index()
     {
@@ -23,7 +34,13 @@ class MealInventoryController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * POST Meal Inventory
+     *
+     * Creates a new Meal Inventory record.
+     *
+     * @authenticated
+     *
+     * @response {"data":{"id":"01h3hkhxrh15atksjr11hrck0d","meal_id":"01h3hkhxrh15atksjr11hrck0d","plates_prepared":64,"active":null}, ...}
      */
     public function store(StoreMealInventoryRequest $request)
     {
@@ -33,7 +50,14 @@ class MealInventoryController extends Controller
     }
 
     /**
-     * Display the specified resource.
+     * GET Meal Inventory
+     *
+     * Returns a Meal Inventory record.
+     *
+     * @authenticated
+     *
+     * @response {"data":{"id":"01h3hkhxrh15atksjr11hrck0d","meal_id":"01h3hkhxrh15atksjr11hrck0d","plates_prepared":64,"active":null}, ...}
+     * @response 404 {"message":"Record not found."}
      */
     public function show(MealInventory $mealInventory)
     {
@@ -41,7 +65,13 @@ class MealInventoryController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
+     * PUT Meal Inventory
+     *
+     * Updates Meal Inventory record.
+     *
+     * @authenticated
+     *
+     * @response {"data":{"id":"01h3hkhxrh15atksjr11hrck0d","meal_id":"01h3hkhxrh15atksjr11hrck0d","plates_prepared":64,"active":null}, ...}
      */
     public function update(UpdateMealInventoryRequest $request, MealInventory $mealInventory)
     {
@@ -51,7 +81,13 @@ class MealInventoryController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * DELETE Meal Inventory
+     *
+     * Deletes Meal Inventory record.
+     * 
+     * @authenticated
+     *
+     * @response 204 {}
      */
     public function destroy(MealInventory $mealInventory)
     {
